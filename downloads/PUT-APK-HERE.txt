@@ -1,0 +1,5 @@
+Place the final signed APK here with this exact filename:
+RJ-Smart-Document-Toolkit.apk
+
+The website Download Android App button points to this file.
+Build the APK from the android project, rename it as above, and copy it into this folder before publishing the website.
