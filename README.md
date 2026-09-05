@@ -1,1 +1,0 @@
-# RJ-Smart-Document-Toolkit
