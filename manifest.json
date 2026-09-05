@@ -1,0 +1,17 @@
+{
+  "name": "RJ Smart Document Toolkit",
+  "short_name": "RJ Smart Toolkit",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#f4f7fb",
+  "theme_color": "#0b1220",
+  "description": "Professional document, PDF and image tools",
+  "icons": [
+    {
+      "src": "assets/rj-tech-logo.png",
+      "sizes": "1254x1254",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

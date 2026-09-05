@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0b1220">
+<title>RJ Smart Document Toolkit</title>
+<link rel="manifest" href="manifest.json">
+<style>
+:root{--bg:#f4f7fb;--card:#fff;--ink:#101828;--muted:#667085;--line:#e4e7ec;--nav:#0b1220;--blue:#1769ff;--blue2:#0b5cff;--soft:#eef4ff;--danger:#d92d20}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);font-family:Inter,Segoe UI,Arial,sans-serif;color:var(--ink)}
+header{background:linear-gradient(135deg,#06162f 0%,#0b3a78 58%,#0b72f0 100%);color:#fff;padding:18px 22px}.brandbar{max-width:1120px;margin:auto;display:flex;align-items:center;gap:15px}.brandlogo{width:62px;height:62px;object-fit:contain;border-radius:14px;background:#fff;padding:3px}.brandcopy h1{margin:0;font-size:25px}.brandcopy p{margin:4px 0 0;color:#dbeafe;font-size:13px}
+.head{max-width:1180px;margin:auto;display:flex;align-items:center;gap:18px}.brandmark{width:64px;height:64px;border-radius:18px;background:#000;display:block;object-fit:cover;box-shadow:0 8px 30px #0005;border:1px solid #ffffff33}.head h1{margin:0;font-size:29px}.head p{margin:5px 0 0;color:#dbe7ff;font-size:14px}.app-download{display:inline-flex;align-items:center;gap:7px;text-decoration:none;background:linear-gradient(135deg,#f5b82e,#ffcf5a);color:#111827;padding:11px 16px;border-radius:12px;font-weight:900;box-shadow:0 7px 20px #0003;white-space:nowrap}.app-download:hover{transform:translateY(-1px)}@media(max-width:700px){.head{align-items:center}.app-download{padding:9px 11px;font-size:12px}.head h1{font-size:20px}.brandmark{width:52px;height:52px}}
+.container{max-width:1180px;margin:-18px auto 0;padding:0 16px 35px}
+.toolbar{background:#fff;border:1px solid var(--line);border-radius:16px;padding:10px;display:flex;gap:8px;align-items:center;box-shadow:0 8px 30px #10182810;margin-bottom:18px}.homebtn{border:0;background:var(--nav);color:#fff;border-radius:10px;padding:10px 15px;font-weight:800;cursor:pointer}.crumb{font-weight:800}.hide{display:none!important}
+.hero{background:#fff;border:1px solid var(--line);border-radius:22px;padding:24px;margin-bottom:18px}.hero h2{margin:0 0 6px;font-size:24px}.hero p{margin:0;color:var(--muted)}
+.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}.tool{background:#fff;border:1px solid var(--line);border-radius:18px;padding:18px;cursor:pointer;box-shadow:0 5px 22px #1018280b;transition:.15s}.tool:hover{transform:translateY(-2px);border-color:#b8cdfc;box-shadow:0 10px 30px #10182818}.icon{width:46px;height:46px;border-radius:13px;background:var(--soft);display:grid;place-items:center;font-size:24px}.tool h3{margin:12px 0 5px;font-size:16px}.tool p{margin:0;color:var(--muted);font-size:12px;line-height:1.45}
+.workspace{display:none}.workspace.active{display:block}.card{background:#fff;border:1px solid var(--line);border-radius:18px;padding:20px;box-shadow:0 5px 22px #1018280b}.card h2{margin:0 0 7px}.muted{color:var(--muted);font-size:13px;line-height:1.55}.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:13px;margin-top:15px}.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:13px;margin-top:15px}label{display:block;font-size:12px;font-weight:800;color:#475467;margin-bottom:6px}input,select,textarea{width:100%;padding:12px;border:1px solid #d0d5dd;border-radius:10px;background:#fff;font-size:14px}textarea{min-height:140px}.actions{display:flex;flex-wrap:wrap;gap:9px;margin-top:15px}.btn{border:0;border-radius:10px;padding:11px 15px;background:var(--nav);color:#fff;font-weight:800;cursor:pointer}.btn.blue{background:var(--blue)}.btn.light{background:#eef2f6;color:var(--ink)}.btn.danger{background:var(--danger)}
+.drop{border:2px dashed #b8c5d6;background:#f8fafc;border-radius:16px;padding:25px;text-align:center;margin-top:15px}.list{display:grid;gap:8px;margin-top:13px}.row{display:flex;gap:10px;align-items:center;border:1px solid var(--line);border-radius:12px;padding:9px}.thumb{width:54px;height:54px;object-fit:cover;border-radius:9px;background:#edf2f7}.grow{flex:1}.small{font-size:12px;color:var(--muted)}.result{margin-top:13px;padding:13px;border-radius:11px;background:#f2f4f7;font-weight:700;word-break:break-word}.ok{background:#ecfdf3;color:#067647}.warn{background:#fffaeb;color:#b54708}.preview{display:block;max-width:100%;max-height:350px;margin:14px auto;border:1px solid var(--line);border-radius:12px}
+canvas{width:100%;height:240px;border:1px solid var(--line);border-radius:12px;touch-action:none;background:#fff}.print-page{max-width:800px;margin:18px auto;background:#fff;padding:35px;border:1px solid var(--line)}
+@media(max-width:950px){.cards{grid-template-columns:repeat(3,1fr)}}@media(max-width:700px){.head{align-items:flex-start}.head h1{font-size:23px}.cards{grid-template-columns:repeat(2,1fr);gap:10px}.tool{padding:14px}.grid,.grid3{grid-template-columns:1fr}.container{padding:0 10px 25px}.hero{padding:18px}.toolbar{margin-top:0}}
+@media print{body{background:#fff}.no-print,header,.toolbar,.hero{display:none!important}.print-page{display:block!important;border:0;margin:0;max-width:none;padding:10mm}}
+</style>
+</head>
+<body>
+<header class="no-print"><div class="head"><img class="brandmark" src="rj-tech-logo.png" alt="RJ TECH Solutions"><div style="flex:1"><h1>RJ Smart Document Toolkit</h1><p>Professional document, PDF & image tools</p></div><a class="app-download" href="downloads/RJ-Smart-Document-Toolkit.apk" download>📱 Download Android App</a></div></header>
+<div class="container">
+<div class="toolbar no-print"><button class="homebtn" onclick="goHome()">🏠 Home</button><span id="crumb" class="crumb">All Tools</span></div>
+<section id="home">
+<div class="hero"><h2>Everything for your documents</h2><p>Fast, clean and privacy-friendly tools. Your files stay on your device/browser for the web version.</p></div>
+<div class="cards" id="cards"></div>
+</section>
+<section id="workspace" class="workspace"><div id="tool"></div></section>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
+<script>
+const TOOLS=[
+['scanner','📷','Document Scanner','Camera/photo to clean PDF'],
+['imgpdf','🖼️','Image → PDF','Turn multiple images into one PDF'],
+['merge','📑','Merge PDF','Combine PDF files'],
+['split','✂️','Split PDF','Extract pages from a PDF'],
+['rotate','🔄','Rotate PDF','Rotate selected PDF pages'],
+['delete','🗑️','Delete Pages','Remove unwanted pages'],
+['extract','📋','Extract Pages','Save selected pages'],
+['compress','🗜️','Compress PDF','Prepare a smaller PDF'],
+['protect','🔐','PDF Password','Protect PDF with password'],
+['sign','✍️','Sign / Annotate','Create a digital signature'],
+['textpdf','📝','Text → PDF','Make a printable PDF']
+];
+const cards=document.getElementById('cards');
+cards.innerHTML=TOOLS.map(t=>`<article class="tool" onclick="openTool('${t[0]}')"><div class="icon">${t[1]}</div><h3>${t[2]}</h3><p>${t[3]}</p></article>`).join('');
+const $=id=>document.getElementById(id), esc=s=>String(s??'').replace(/[&<>"]/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[m]));
+function goHome(){$('workspace').classList.remove('active');$('home').style.display='block';$('crumb').textContent='All Tools';scrollTo(0,0)}
+const T={};
+T.imgpdf=`<div class="card"><h2>🖼️ Image → PDF</h2><p class="muted">Select multiple images. The app creates a standard PDF directly on your device.</p><div class="drop"><input id="imgs" type="file" accept="image/*" multiple><div class="small">JPG, PNG, WebP • multiple files supported</div></div><div id="imglist" class="list"></div><div class="grid3"><div><label>Page Size</label><select id="size"><option value="a4">A4</option><option value="letter">Letter</option></select></div><div><label>Orientation</label><select id="orient"><option value="auto">Auto</option><option value="portrait">Portrait</option><option value="landscape">Landscape</option></select></div><div><label>Image Quality</label><input id="quality" type="range" min=".5" max="1" step=".05" value=".85"></div></div><div class="actions"><button class="btn blue" onclick="createImagePdf()">📄 Download PDF</button><button class="btn" onclick="printImagePdf()">🖨 Print / Save as PDF</button><button class="btn light" onclick="clearImg()">Clear</button></div><div id="imgmsg" class="result"></div></div>`;
+T.scanner=`<div class="card"><h2>📷 Document Scanner</h2><p class="muted">Use your phone camera or choose a photo, then create a PDF.</p><div class="drop"><input id="scan" type="file" accept="image/*" capture="environment"></div><img id="scanprev" class="preview hide"><div class="actions"><button class="btn blue" onclick="scanToPdf()">📄 Download PDF</button><button class="btn" onclick="printScan()">🖨 Print / Save PDF</button></div><div id="scanmsg" class="result"></div></div>`;
+T.compress=`<div class="card"><h2>🗜️ Compress PDF</h2><p class="muted">Re-saves the PDF with a clean object structure. For scanned PDFs, use Image → PDF with lower quality for a much smaller file.</p><input id="cpdf" type="file" accept="application/pdf" style="margin-top:12px"><div class="actions"><button class="btn blue" onclick="compressPdf()">⬇ Save Optimized PDF</button></div><div id="cmsg" class="result"></div></div>`;
+T.merge=`<div class="card"><h2>📑 Merge PDF</h2><p class="muted">Combine multiple PDF files into one. Processing happens in your browser/device.</p><input id="merge" type="file" accept="application/pdf" multiple style="margin-top:12px"><div class="actions"><button class="btn blue" onclick="mergePdfs()">📑 Merge & Download</button></div><div id="mmsg" class="result"></div></div>`;
+T.split=`<div class="card"><h2>✂️ Split PDF</h2><input id="split" type="file" accept="application/pdf" style="margin-top:12px"><label style="margin-top:12px">Pages (example: 1,3,5-7)</label><input id="splitp" placeholder="1,3,5-7"><div class="actions"><button class="btn blue" onclick="splitPdf()">✂️ Create PDF</button></div><div id="smsg" class="result"></div></div>`;
+T.rotate=`<div class="card"><h2>🔄 Rotate PDF</h2><input id="rot" type="file" accept="application/pdf" style="margin-top:12px"><div class="grid"><div><label>Rotation</label><select id="deg"><option value="90">90°</option><option value="180">180°</option><option value="270">270°</option></select></div><div><label>Pages</label><input id="rotp" placeholder="All"></div></div><div class="actions"><button class="btn blue" onclick="rotatePdf()">🔄 Rotate & Download</button></div><div id="rmsg" class="result"></div></div>`;
+T.delete=`<div class="card"><h2>🗑️ Delete PDF Pages</h2><input id="del" type="file" accept="application/pdf" style="margin-top:12px"><label style="margin-top:12px">Pages to delete</label><input id="delp" placeholder="2,4-6"><div class="actions"><button class="btn blue" onclick="deletePages()">🗑️ Create PDF</button></div><div id="dmsg" class="result"></div></div>`;
+T.extract=`<div class="card"><h2>📋 Extract PDF Pages</h2><input id="ext" type="file" accept="application/pdf" style="margin-top:12px"><label style="margin-top:12px">Pages to extract</label><input id="extp" placeholder="1,3,5-7"><div class="actions"><button class="btn blue" onclick="extractPages()">📋 Create PDF</button></div><div id="emsg" class="result"></div></div>`;
+T.protect=`<div class="card"><h2>🔐 PDF Password</h2><p class="muted">PDF-lib does not provide PDF encryption/password writing. This button validates your password instead of pretending to protect the file.</p><input id="pf" type="file" accept="application/pdf" style="margin-top:12px"><div class="grid"><div><label>Password</label><input id="p1" type="password"></div><div><label>Confirm</label><input id="p2" type="password"></div></div><div class="actions"><button class="btn blue" onclick="checkPass()">Validate Password</button></div><div id="pmsg" class="result"></div></div>`;
+T.sign=`<div class="card"><h2>✍️ Signature</h2><p class="muted">Draw with mouse or finger and save as PNG.</p><canvas id="sig"></canvas><div class="actions"><button class="btn blue" onclick="saveSig()">⬇ Save Signature</button><button class="btn light" onclick="clearSig()">Clear</button></div></div>`;
+T.textpdf=`<div class="card"><h2>📝 Text → PDF</h2><div class="grid"><div><label>Title</label><input id="dt" value="My Document"></div><div><label>Author</label><input id="da"></div></div><textarea id="dx" placeholder="Type or paste your document..." style="margin-top:13px"></textarea><div class="actions"><button class="btn blue" onclick="printText()">🖨 Print / Save as PDF</button></div></div>`;
+function renderTool(id,addHistory=true){let t=TOOLS.find(x=>x[0]===id);if(!t)return;$('home').style.display='none';$('workspace').classList.add('active');$('crumb').textContent=t[2];$('tool').innerHTML=T[id];bind(id);scrollTo(0,0);if(addHistory)history.pushState({tool:id},'',location.pathname+'#'+id)}
+function openTool(id){renderTool(id,true)}
+function showHome(){ $('workspace').classList.remove('active'); $('home').style.display='block'; $('crumb').textContent='All Tools'; scrollTo(0,0) }
+function goHome(){ if($('workspace').classList.contains('active')) history.back(); else showHome(); }
+window.addEventListener('popstate',function(){let id=location.hash.replace('#',''); if(id&&TOOLS.some(x=>x[0]===id)) renderTool(id,false); else showHome();});
+let imageFiles=[];
+function bind(id){
+ if(id==='imgpdf'){$('imgs').onchange=e=>{imageFiles=[...e.target.files];renderImgList()}}
+ if(id==='scanner')$('scan').onchange=e=>{let f=e.target.files[0];if(f){$('scanprev').src=URL.createObjectURL(f);$('scanprev').classList.remove('hide')}}
+ if(id==='sign')initSig();
+}
+function renderImgList(){let b=$('imglist');b.innerHTML='';imageFiles.forEach((f,i)=>{let r=document.createElement('div');r.className='row';r.innerHTML=`<img class="thumb" src="${URL.createObjectURL(f)}"><div class="grow"><b>${i+1}. ${esc(f.name)}</b><div class="small">${Math.round(f.size/1024)} KB</div></div>`;[['↑',-1],['↓',1],['×',0]].forEach(([txt,d])=>{let x=document.createElement('button');x.className='btn light';x.textContent=txt;x.onclick=()=>{if(txt==='×'){imageFiles.splice(i,1)}else{let j=i+d;if(j>=0&&j<imageFiles.length)[imageFiles[i],imageFiles[j]]=[imageFiles[j],imageFiles[i]]}renderImgList()};r.appendChild(x)});b.appendChild(r)})}
+function clearImg(){imageFiles=[];$('imgs').value='';renderImgList();$('imgmsg').textContent=''}
+function readImage(f){return new Promise((res,rej)=>{let i=new Image();i.onload=()=>res(i);i.onerror=rej;i.src=URL.createObjectURL(f)})}
+function ascii(s){return new TextEncoder().encode(s)}
+function joinBytes(arrs){let n=arrs.reduce((a,b)=>a+b.length,0),o=new Uint8Array(n),p=0;for(const a of arrs){o.set(a,p);p+=a.length}return o}
+function makePdfBinary(images,quality,orient,size){
+ const objs=[], pages=[]; const add=o=>{objs.push(o);return objs.length};
+ const pagesRef=add(null);
+ images.forEach((im,k)=>{
+   let pw=size==='letter'?612:595,ph=size==='letter'?792:842;
+   let portrait=im.height>=im.width;if(orient==='portrait')portrait=true;if(orient==='landscape')portrait=false;if(!portrait)[pw,ph]=[ph,pw];
+   const margin=24,maxW=pw-margin*2,maxH=ph-margin*2,sc=Math.min(maxW/im.width,maxH/im.height),w=im.width*sc,h=im.height*sc,x=(pw-w)/2,y=(ph-h)/2;
+   let c=document.createElement('canvas');c.width=im.width;c.height=im.height;let cx=c.getContext('2d');cx.fillStyle='#fff';cx.fillRect(0,0,c.width,c.height);cx.drawImage(im,0,0);
+   let bytes=(()=>{let u=c.toDataURL('image/jpeg',quality),b=atob(u.split(',')[1]),a=new Uint8Array(b.length);for(let i=0;i<b.length;i++)a[i]=b.charCodeAt(i);return a})();
+   let imgRef=add({stream:true,head:`<< /Type /XObject /Subtype /Image /Width ${c.width} /Height ${c.height} /ColorSpace /DeviceRGB /BitsPerComponent 8 /Filter /DCTDecode /Length ${bytes.length} >>`,bytes});
+   let content=`q ${w.toFixed(3)} 0 0 ${h.toFixed(3)} ${x.toFixed(3)} ${y.toFixed(3)} cm /Im${k+1} Do Q`;
+   let contRef=add({text:`<< /Length ${ascii(content).length} >>\nstream\n${content}\nendstream`});
+   let pageRef=add({text:`<< /Type /Page /Parent ${pagesRef} 0 R /MediaBox [0 0 ${pw} ${ph}] /Resources << /XObject << /Im${k+1} ${imgRef} 0 R >> >> /Contents ${contRef} 0 R >>`});
+   pages.push(pageRef);
+ });
+ objs[pagesRef-1]={text:`<< /Type /Pages /Kids [${pages.map(x=>x+' 0 R').join(' ')}] /Count ${pages.length} >>`};
+ const catRef=add({text:`<< /Type /Catalog /Pages ${pagesRef} 0 R >>`});
+ let chunks=[ascii('%PDF-1.4\n%\xFF\xFF\n')], offsets=[0], pos=chunks[0].length;
+ for(let i=0;i<objs.length;i++){
+   offsets[i+1]=pos;let head=ascii(`${i+1} 0 obj\n`);
+   chunks.push(head);pos+=head.length;
+   let o=objs[i];
+   if(o.stream){let h=ascii(o.head+'\nstream\n');const tail=ascii('\nendstream\nendobj\n');chunks.push(h,o.bytes,tail);pos+=h.length+o.bytes.length+tail.length}
+   else{let b=ascii(o.text+'\nendobj\n');chunks.push(b);pos+=b.length}
+ }
+ const xrefPos=pos;let xref=`xref\n0 ${objs.length+1}\n0000000000 65535 f \n`;for(let i=1;i<=objs.length;i++)xref+=String(offsets[i]).padStart(10,'0')+' 00000 n \n';xref+=`trailer\n<< /Size ${objs.length+1} /Root ${catRef} 0 R >>\nstartxref\n${xrefPos}\n%%EOF`;
+ chunks.push(ascii(xref));return joinBytes(chunks)
+}
+async function createImagePdf(){if(!imageFiles.length){$('imgmsg').textContent='Please select at least one image.';return}try{let ims=await Promise.all(imageFiles.map(readImage));let data=makePdfBinary(ims,+$('quality').value,$('orient').value,$('size').value);download(new Blob([data],{type:'application/pdf'}),'RJ-Smart-Document.pdf');$('imgmsg').className='result ok';$('imgmsg').textContent=`PDF created successfully • ${ims.length} page(s)`}catch(e){console.error(e);$('imgmsg').className='result warn';$('imgmsg').textContent='PDF creation failed. Use Print / Save as PDF as a fallback.'}}
+function printImagePdf(){if(window.Android&&Android.printPage){Android.printPage();return}if(!imageFiles.length){$('imgmsg').textContent='Select images first.';return}Promise.all(imageFiles.map(readImage)).then(ims=>{let w=open('','_blank');w.document.write('<html><head><title>RJ Smart Document</title><style>@page{size:A4;margin:10mm}body{margin:0}img{display:block;width:100%;height:auto;page-break-after:always}</style></head><body>'+ims.map(i=>`<img src="${i.src}">`).join('')+'</body></html>');w.document.close();setTimeout(()=>w.print(),500)})}
+function scanToPdf(){let f=$('scan').files[0];if(!f)return $('scanmsg').textContent='Capture/select a document first.';readImage(f).then(im=>{let data=makePdfBinary([im],.85,'auto','a4');download(new Blob([data],{type:'application/pdf'}),'RJ-Scanned-Document.pdf');$('scanmsg').className='result ok';$('scanmsg').textContent='Scan converted to PDF successfully.'})}
+function printScan(){if(window.Android&&Android.printPage){Android.printPage();return}let f=$('scan').files[0];if(!f)return $('scanmsg').textContent='Capture/select a document first.';let w=open('','_blank');w.document.write(`<html><head><style>@page{size:A4;margin:10mm}img{width:100%}</style></head><body><img src="${URL.createObjectURL(f)}"></body></html>`);w.document.close();setTimeout(()=>w.print(),500)}
+function pagesFromSpec(spec,count){let set=new Set();for(const part of String(spec||'').split(',')){let z=part.trim();if(!z)continue;if(/^\d+$/.test(z)){let n=+z;if(n>=1&&n<=count)set.add(n-1)}else{let m=z.match(/^(\d+)\s*-\s*(\d+)$/);if(m){let a=Math.min(+m[1],+m[2]),b=Math.max(+m[1],+m[2]);for(let n=a;n<=b;n++)if(n>=1&&n<=count)set.add(n-1)}}}return [...set].sort((a,b)=>a-b)}
+async function loadPdfFile(input){let f=$(input).files[0];if(!f)throw new Error('Select a PDF first.');return PDFLib.PDFDocument.load(await f.arrayBuffer())}
+async function savePdfDoc(doc,name){let bytes=await doc.save({useObjectStreams:true,addDefaultPage:false});download(new Blob([bytes],{type:'application/pdf'}),name)}
+async function mergePdfs(){try{let fs=[...$('merge').files];if(!fs.length)throw Error('Select at least one PDF.');let out=await PDFLib.PDFDocument.create();for(const f of fs){let src=await PDFLib.PDFDocument.load(await f.arrayBuffer());let pages=await out.copyPages(src,src.getPageIndices());pages.forEach(p=>out.addPage(p))}await savePdfDoc(out,'RJ-Merged.pdf');$('mmsg').className='result ok';$('mmsg').textContent=`Merged ${fs.length} PDF file(s) successfully.`}catch(e){console.error(e);$('mmsg').textContent='Could not merge this PDF set. Check that the files are valid and not encrypted.'}}
+async function splitPdf(){try{let src=await loadPdfFile('split'),idx=pagesFromSpec($('splitp').value,src.getPageCount());if(!idx.length)throw Error('Enter valid page numbers.');let out=await PDFLib.PDFDocument.create();let pages=await out.copyPages(src,idx);pages.forEach(p=>out.addPage(p));await savePdfDoc(out,'RJ-Split.pdf');$('smsg').className='result ok';$('smsg').textContent=`Created ${idx.length} selected page(s).`}catch(e){console.error(e);$('smsg').textContent=e.message||'Split failed.'}}
+async function extractPages(){try{let src=await loadPdfFile('ext'),idx=pagesFromSpec($('extp').value,src.getPageCount());if(!idx.length)throw Error('Enter valid page numbers.');let out=await PDFLib.PDFDocument.create();let pages=await out.copyPages(src,idx);pages.forEach(p=>out.addPage(p));await savePdfDoc(out,'RJ-Extracted-Pages.pdf');$('emsg').className='result ok';$('emsg').textContent=`Extracted ${idx.length} page(s).`}catch(e){console.error(e);$('emsg').textContent=e.message||'Extraction failed.'}}
+async function deletePages(){try{let src=await loadPdfFile('del'),remove=new Set(pagesFromSpec($('delp').value,src.getPageCount()));let keep=src.getPageIndices().filter(i=>!remove.has(i));if(!keep.length)throw Error('You cannot delete every page.');let out=await PDFLib.PDFDocument.create();let pages=await out.copyPages(src,keep);pages.forEach(p=>out.addPage(p));await savePdfDoc(out,'RJ-Without-Deleted-Pages.pdf');$('dmsg').className='result ok';$('dmsg').textContent=`Removed ${remove.size} page(s).`}catch(e){console.error(e);$('dmsg').textContent=e.message||'Delete failed.'}}
+async function rotatePdf(){try{let src=await loadPdfFile('rot'),idx=$('rotp').value.trim()?pagesFromSpec($('rotp').value,src.getPageCount()):src.getPageIndices(),deg=+$('deg').value;idx.forEach(i=>{let p=src.getPage(i);p.setRotation(PDFLib.degrees((p.getRotation().angle+deg)%360))});await savePdfDoc(src,'RJ-Rotated.pdf');$('rmsg').className='result ok';$('rmsg').textContent=`Rotated ${idx.length} page(s) by ${deg}°.`}catch(e){console.error(e);$('rmsg').textContent=e.message||'Rotation failed.'}}
+async function compressPdf(){try{let src=await loadPdfFile('cpdf');await savePdfDoc(src,'RJ-Optimized.pdf');$('cmsg').className='result ok';$('cmsg').textContent='PDF re-saved successfully. Scanned/image PDFs may not shrink much.'}catch(e){console.error(e);$('cmsg').textContent='Could not optimize this PDF. It may be encrypted or invalid.'}}
+function inspectPdf(input,out){let fs=$(input).files;if(!fs||!fs.length)return $(out).textContent='Select a PDF first.';let total=[...fs].reduce((s,f)=>s+f.size,0);$(out).className='result ok';$(out).textContent=`Selected ${fs.length} file(s) • ${Math.round(total/1024)} KB. Native Android PDF processing is required for full page editing.`}
+function checkPass(){let f=$('pf').files[0],a=$('p1').value,b=$('p2').value;if(!f)return $('pmsg').textContent='Select a PDF first.';if(!a)return $('pmsg').textContent='Enter a password.';if(a!==b)return $('pmsg').textContent='Passwords do not match.';$('pmsg').className='result ok';$('pmsg').textContent='Password confirmed. Android native protection can apply it to the PDF.'}
+function initSig(){let c=$('sig'),d=devicePixelRatio||1;c.width=c.clientWidth*d;c.height=240*d;let x=c.getContext('2d');x.scale(d,d);x.lineWidth=2.2;x.lineCap='round';let on=false,pos=e=>{let r=c.getBoundingClientRect(),p=e.touches?e.touches[0]:e;return[p.clientX-r.left,p.clientY-r.top]};let st=e=>{on=true;x.beginPath();x.moveTo(...pos(e));e.preventDefault()},mv=e=>{if(!on)return;x.lineTo(...pos(e));x.stroke();e.preventDefault()};c.addEventListener('mousedown',st);c.addEventListener('mousemove',mv);c.addEventListener('mouseup',()=>on=false);c.addEventListener('mouseleave',()=>on=false);c.addEventListener('touchstart',st,{passive:false});c.addEventListener('touchmove',mv,{passive:false});c.addEventListener('touchend',()=>on=false);c._x=x}
+function clearSig(){let c=$('sig');c._x.clearRect(0,0,c.clientWidth,c.clientHeight)}function saveSig(){$('sig').toBlob(b=>download(b,'RJ-signature.png'),'image/png')}
+function printText(){let t=esc($('dt').value||'Document'),a=esc($('da').value),x=esc($('dx').value).replace(/\n/g,'<br>'),w=open('','_blank');w.document.write(`<html><head><title>${t}</title><style>body{font-family:Arial;padding:40px;line-height:1.7}h1{border-bottom:2px solid #111;padding-bottom:10px}</style></head><body><h1>${t}</h1><small>${a}</small><p>${x}</p></body></html>`);w.document.close();setTimeout(()=>w.print(),300)}
+function download(blob,name){if(window.Android&&Android.saveBase64){let r=new FileReader();r.onloadend=()=>{let u=String(r.result),b=u.split(',')[1]||'';Android.saveBase64(name,b,blob.type||'application/octet-stream')};r.readAsDataURL(blob);return}let a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=name;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(a.href),1200)}
+if('serviceWorker' in navigator)window.addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{}));
+</script>
+</body></html>
